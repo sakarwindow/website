@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
-import { products } from "@/lib/data";
+import { featuredProducts } from "@/lib/data";
 import ProductCard from "../ProductCard";
 import { Eyebrow, Reveal, SplitText } from "../ui/motion";
 
@@ -24,10 +24,10 @@ export default function ProductShowcase() {
             </Link>
           </Reveal>
         </div>
-        <p className="mt-4 hidden text-sm text-ink/45 [@media(hover:hover)]:block">Hover a product to see it open.</p>
+        <p className="mt-4 hidden text-sm text-ink/45 [@media(hover:hover)]:block">Hover a product to take a closer look.</p>
 
         <div className="mt-14 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {products.slice(0, 6).map((p, i) => (
+          {featuredProducts.map((p, i) => (
             <ProductCard key={p.slug} product={p} index={i} />
           ))}
         </div>

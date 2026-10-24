@@ -1,12 +1,12 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
-import { motion, useScroll, useTransform } from "framer-motion";
+import { AnimatePresence, motion, useScroll, useTransform } from "framer-motion";
 import { ArrowDown, ArrowUpRight, Droplets, Volume2 } from "lucide-react";
-import WindowArt from "../WindowArt";
 import { Magnetic, SplitText } from "../ui/motion";
-import { company } from "@/lib/data";
+import { company, heroSlides } from "@/lib/data";
 
 const ease = [0.22, 1, 0.36, 1] as const;
 
@@ -18,16 +18,13 @@ export default function Hero() {
   const scale = useTransform(scrollYProgress, [0, 1], [1, 0.9]);
   const opacity = useTransform(scrollYProgress, [0, 0.8], [1, 0]);
 
-  // Window slides open shortly after load, then breathes open/closed
-  const [open, setOpen] = useState(false);
+  // Cross-fade through the featured photos
+  const [slide, setSlide] = useState(0);
   useEffect(() => {
-    const first = setTimeout(() => setOpen(true), 1400);
-    const loop = setInterval(() => setOpen((o) => !o), 4200);
-    return () => {
-      clearTimeout(first);
-      clearInterval(loop);
-    };
+    const t = setInterval(() => setSlide((n) => (n + 1) % heroSlides.length), 5500);
+    return () => clearInterval(t);
   }, []);
+  const current = heroSlides[slide];
 
   return (
     <section ref={ref} className="grain relative min-h-svh overflow-hidden bg-ink text-white">
@@ -89,19 +86,76 @@ export default function Hero() {
           </motion.div>
         </motion.div>
 
-        <motion.div style={{ y: yArt, scale }} className="relative mx-auto w-full max-w-[17rem] sm:max-w-sm lg:col-span-5 lg:max-w-md">
+        <motion.div style={{ y: yArt, scale }} className="relative mx-auto w-full max-w-[18rem] sm:max-w-sm lg:col-span-5 lg:max-w-md">
           <motion.div
-            initial={{ opacity: 0, y: 80, rotateY: -20 }}
-            animate={{ opacity: 1, y: 0, rotateY: 0 }}
-            transition={{ duration: 1.4, ease, delay: 0.3 }}
-            className="relative [perspective:1200px]"
+            initial={{ opacity: 0, y: 60, clipPath: "inset(18% 18% 18% 18% round 2.5rem)" }}
+            animate={{ opacity: 1, y: 0, clipPath: "inset(0% 0% 0% 0% round 2.5rem)" }}
+            transition={{ duration: 1.5, ease, delay: 0.3 }}
+            className="relative"
           >
-            <div className="absolute inset-6 rounded-3xl bg-sky/30 blur-3xl" />
-            <WindowArt kind="sliding" state={open ? "hover" : "rest"} className="relative w-full drop-shadow-[0_40px_60px_rgba(0,0,0,0.5)]" />
+            <div className="absolute -inset-4 rounded-[3rem] bg-brass/20 blur-3xl" />
+            <div className="relative aspect-[4/5] overflow-hidden rounded-[2.5rem] border border-white/10 shadow-[0_40px_80px_-20px_rgba(0,0,0,0.7)]">
+              <AnimatePresence initial={false}>
+                <motion.div
+                  key={current.src}
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                  transition={{ duration: 1.2 }}
+                  className="absolute inset-0"
+                >
+                  {/* Slow Ken Burns zoom while each photo is shown */}
+                  <motion.div
+                    initial={{ scale: 1.15 }}
+                    animate={{ scale: 1 }}
+                    transition={{ duration: 7, ease: "easeOut" }}
+                    className="absolute inset-0"
+                  >
+                    <Image
+                      src={current.src}
+                      alt={current.alt}
+                      fill
+                      preload={slide === 0}
+                      sizes="(min-width: 1024px) 28rem, (min-width: 640px) 24rem, 18rem"
+                      style={{ objectPosition: current.focus }}
+                      className="object-cover"
+                    />
+                  </motion.div>
+                </motion.div>
+              </AnimatePresence>
+              <div className="absolute inset-0 bg-gradient-to-t from-ink/70 via-transparent to-transparent" />
+              <Link
+                href={`/products/${current.slug}`}
+                className="group absolute inset-x-4 bottom-4 flex items-center justify-between rounded-2xl border border-white/15 bg-ink/40 px-4 py-3 backdrop-blur-md transition hover:bg-ink/60"
+              >
+                <AnimatePresence mode="wait">
+                  <motion.span
+                    key={current.name}
+                    initial={{ opacity: 0, y: 8 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -8 }}
+                    className="text-sm font-semibold"
+                  >
+                    {current.name}
+                  </motion.span>
+                </AnimatePresence>
+                <ArrowUpRight className="size-4 text-brass transition-transform group-hover:rotate-45" />
+              </Link>
+            </div>
+            <div className="absolute -bottom-8 left-1/2 flex -translate-x-1/2 gap-2">
+              {heroSlides.map((h, i) => (
+                <button
+                  key={h.src}
+                  onClick={() => setSlide(i)}
+                  aria-label={`Show ${h.name}`}
+                  className={`h-1 rounded-full transition-all duration-500 ${i === slide ? "w-8 bg-brass" : "w-3 bg-white/25 hover:bg-white/50"}`}
+                />
+              ))}
+            </div>
           </motion.div>
 
-          <FloatCard className="-left-4 top-6 sm:-left-16 sm:top-16" delay={1.4} icon={<Volume2 className="size-5" />} title="Peaceful" text="Sound resistance" />
-          <FloatCard className="-right-4 bottom-6 sm:-right-12 sm:bottom-20" delay={1.6} icon={<Droplets className="size-5" />} title="Zero leaks" text="Water resistance" />
+          <FloatCard className="-left-4 top-10 sm:-left-16 sm:top-20" delay={1.4} icon={<Volume2 className="size-5" />} title="Peaceful" text="Sound resistance" />
+          <FloatCard className="-right-4 bottom-24 sm:-right-12 sm:bottom-28" delay={1.6} icon={<Droplets className="size-5" />} title="Zero leaks" text="Water resistance" />
         </motion.div>
       </div>
 

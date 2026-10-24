@@ -5,7 +5,7 @@ import CTA from "@/components/sections/CTA";
 
 export const metadata: Metadata = {
   title: "Products",
-  description: "Explore our complete range of aluminium windows, doors and specialty systems.",
+  description: "Explore our complete range of aluminium sliding systems, windows, doors, partitions and cladding.",
 };
 
 export default function ProductsPage() {
@@ -15,7 +15,7 @@ export default function ProductsPage() {
         eyebrow="Product Catalog"
         title="Windows & doors, engineered to perform."
         italic={["engineered"]}
-        text="From compact ventilators to panoramic lift & slide doors — explore systems built for comfort, security and lasting beauty."
+        text="From slim sliding systems and arched windows to entrance doors, glass partitions and cladding — explore our complete aluminium range."
       />
       <ProductGrid />
       <CTA />

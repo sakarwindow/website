@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { ArrowLeft, ArrowUpRight, Check } from "lucide-react";
+import { ArrowLeft, ArrowUpRight, Check, FileText, Phone } from "lucide-react";
 import { company, products } from "@/lib/data";
-import ProductViewer from "@/components/ProductViewer";
+import ProductGallery from "@/components/ProductGallery";
 import ProductCard from "@/components/ProductCard";
 import CTA from "@/components/sections/CTA";
 import { Eyebrow, Reveal, SplitText } from "@/components/ui/motion";
@@ -15,7 +15,9 @@ export function generateStaticParams() {
 export async function generateMetadata(props: PageProps<"/products/[slug]">): Promise<Metadata> {
   const { slug } = await props.params;
   const product = products.find((p) => p.slug === slug);
-  return product ? { title: product.name, description: product.summary } : {};
+  return product
+    ? { title: product.name, description: product.summary, openGraph: { images: [product.images[0].src] } }
+    : {};
 }
 
 export default async function ProductPage(props: PageProps<"/products/[slug]">) {
@@ -70,7 +72,7 @@ export default async function ProductPage(props: PageProps<"/products/[slug]">) 
             </Reveal>
           </div>
 
-          <ProductViewer kind={product.kind} />
+          <ProductGallery images={product.images} />
         </div>
       </section>
 
@@ -93,23 +95,31 @@ export default async function ProductPage(props: PageProps<"/products/[slug]">) 
           </div>
 
           <div>
-            <Eyebrow>Technical Specifications</Eyebrow>
-            <Reveal className="mt-10 overflow-hidden rounded-3xl border border-ink/10 bg-white">
-              <dl>
-                {product.specs.map((s) => (
-                  <div
-                    key={s.label}
-                    className="grid grid-cols-2 gap-4 border-b border-ink/10 px-6 py-5 transition-colors last:border-0 hover:bg-paper"
-                  >
-                    <dt className="text-ink/55">{s.label}</dt>
-                    <dd className="font-semibold">{s.value}</dd>
-                  </div>
-                ))}
-              </dl>
+            <Eyebrow>Specifications</Eyebrow>
+            <Reveal className="mt-10 rounded-3xl bg-ink p-8 text-white md:p-10">
+              <FileText className="size-8 text-brass" />
+              <h3 className="mt-6 text-2xl font-semibold tracking-tight">Tailored to your opening</h3>
+              <p className="mt-3 leading-relaxed text-white/60">
+                Profile sizes, glass options, hardware and finishes for the {product.name} are configured to your
+                site&apos;s dimensions and wind load. Share your requirements and we&apos;ll send detailed specifications
+                with your quotation.
+              </p>
+              <div className="mt-8 flex flex-wrap gap-3">
+                <Link
+                  href={`/contact?product=${product.slug}`}
+                  className="group inline-flex items-center gap-2 rounded-full bg-brass px-6 py-3 font-semibold text-ink transition hover:bg-brass-2"
+                >
+                  Request specifications
+                  <ArrowUpRight className="size-4 transition-transform group-hover:rotate-45" />
+                </Link>
+                <a
+                  href={`tel:${company.phone.replace(/\s/g, "")}`}
+                  className="inline-flex items-center gap-2 rounded-full border border-white/20 px-6 py-3 font-semibold transition hover:bg-white/5"
+                >
+                  <Phone className="size-4" /> Call us
+                </a>
+              </div>
             </Reveal>
-            <p className="mt-4 text-sm text-ink/45">
-              Specifications vary by profile series and opening size. Contact {company.short} for project-specific data.
-            </p>
           </div>
         </div>
       </section>

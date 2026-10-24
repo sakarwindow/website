@@ -1,17 +1,21 @@
 import type { Metadata } from "next";
-import { company } from "@/lib/data";
+import Image from "next/image";
+import { company, products } from "@/lib/data";
 import PageHeader from "@/components/PageHeader";
 import Intro from "@/components/sections/Intro";
 import Features from "@/components/sections/Features";
 import Process from "@/components/sections/Process";
 import CTA from "@/components/sections/CTA";
-import WindowArt from "@/components/WindowArt";
 import { Eyebrow, Reveal, SplitText } from "@/components/ui/motion";
 
 export const metadata: Metadata = {
   title: "About Us",
   description: `${company.name} designs and manufactures high-quality aluminium windows, doors and customised architectural solutions.`,
 };
+
+const aboutPhotos = ["tilt-and-turn-series", "alu-wood-sliding-series", "parallel-window", "wall-cladding-series"].map(
+  (slug) => products.find((p) => p.slug === slug)!,
+);
 
 export default function AboutPage() {
   return (
@@ -27,12 +31,19 @@ export default function AboutPage() {
         <div className="mx-auto grid grid-cols-1 max-w-7xl items-center gap-16 lg:grid-cols-2">
           <Reveal className="relative order-2 lg:order-1">
             <div className="grid grid-cols-2 gap-4">
-              {(["tilt-turn", "slide-fold", "bay", "french"] as const).map((k, i) => (
+              {aboutPhotos.map((p, i) => (
                 <div
-                  key={k}
-                  className={`grid place-items-center rounded-3xl bg-white p-6 shadow-sm ${i % 2 ? "translate-y-10" : ""}`}
+                  key={p.slug}
+                  className={`group relative aspect-[3/4] overflow-hidden rounded-3xl shadow-sm ${i % 2 ? "translate-y-10" : ""}`}
                 >
-                  <WindowArt kind={k} state="rest" className="h-40 w-auto" />
+                  <Image
+                    src={p.images[0].src}
+                    alt={p.images[0].alt}
+                    fill
+                    sizes="(min-width: 1024px) 18rem, 45vw"
+                    style={{ objectPosition: p.images[0].focus }}
+                    className="object-cover transition-transform duration-1000 group-hover:scale-110"
+                  />
                 </div>
               ))}
             </div>
