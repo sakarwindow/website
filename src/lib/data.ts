@@ -10,7 +10,7 @@ export const company = {
   short: "Sakar",
   tagline: "Frames that define the view.",
   description:
-    "Precision-engineered uPVC and aluminium window & door systems — built for Indian climates, designed for modern architecture.",
+    "High-quality aluminium windows, doors and customised architectural solutions — the perfect balance of style, strength and functionality.",
   phone: "+91 98765 43210",
   email: "info@sakarwindowsystem.com",
   address: "Plot 12, GIDC Industrial Estate, Ahmedabad, Gujarat, India",
@@ -56,7 +56,7 @@ export const products: Product[] = [
     name: "Sliding Window",
     kind: "sliding",
     category: "Windows",
-    material: "uPVC / Aluminium",
+    material: "Aluminium",
     summary: "Space-saving 2 & 3-track sliders with whisper-smooth rollers.",
     description:
       "Our sliding window system glides on stainless-steel roller assemblies within a multi-chamber profile. Ideal where outward opening is not possible — balconies, corridors and large spans — while delivering excellent sealing against dust and monsoon rain.",
@@ -80,7 +80,7 @@ export const products: Product[] = [
     name: "Casement Window",
     kind: "casement",
     category: "Windows",
-    material: "uPVC",
+    material: "Aluminium",
     summary: "Side-hung windows with compression seals for total weatherproofing.",
     description:
       "Casement windows open fully outward or inward on friction stays or hinges, giving maximum ventilation and an unobstructed view. Double EPDM gaskets compress on closing for superior acoustic and thermal insulation.",
@@ -104,7 +104,7 @@ export const products: Product[] = [
     name: "Tilt & Turn Window",
     kind: "tilt-turn",
     category: "Windows",
-    material: "uPVC",
+    material: "Aluminium",
     summary: "European dual-action hardware — tilt to vent, turn to open.",
     description:
       "One handle, two functions. Tilt the sash inward from the top for secure ventilation, or turn it fully open for cleaning and fresh air. Concealed multi-point hardware makes it one of the most secure window types available.",
@@ -128,7 +128,7 @@ export const products: Product[] = [
     name: "Fixed Window",
     kind: "fixed",
     category: "Windows",
-    material: "uPVC / Aluminium",
+    material: "Aluminium",
     summary: "Uninterrupted glass for panoramic views and natural light.",
     description:
       "Fixed glazing brings large architectural openings to life. With no moving parts, it offers the best thermal and acoustic performance and can be combined with openable sashes for any façade composition.",
@@ -152,7 +152,7 @@ export const products: Product[] = [
     name: "Lift & Slide Door",
     kind: "sliding-door",
     category: "Doors",
-    material: "uPVC / Aluminium",
+    material: "Aluminium",
     summary: "Large-format sliding doors that open your space to the outdoors.",
     description:
       "Heavy panels up to 300 kg glide effortlessly with lift & slide hardware. When closed, the sash lowers onto its seals for complete weather protection. Perfect for terraces, gardens and sea-facing homes.",
@@ -176,7 +176,7 @@ export const products: Product[] = [
     name: "French Door",
     kind: "french",
     category: "Doors",
-    material: "uPVC",
+    material: "Aluminium",
     summary: "Classic double doors with modern multi-point security.",
     description:
       "Elegant twin-leaf doors that open without a central mullion, creating a wide, welcoming entrance. Reinforced steel profiles and multi-point locks deliver strength without compromising on style.",
@@ -224,7 +224,7 @@ export const products: Product[] = [
     name: "Bay Window",
     kind: "bay",
     category: "Specialty",
-    material: "uPVC",
+    material: "Aluminium",
     summary: "Projecting window combinations that add depth and light.",
     description:
       "Bay and bow configurations extend the room outward, creating a seating nook and capturing light from three directions. Engineered couplers and bay poles ensure structural rigidity.",
@@ -248,7 +248,7 @@ export const products: Product[] = [
     name: "Ventilator & Louver",
     kind: "louver",
     category: "Specialty",
-    material: "uPVC / Aluminium",
+    material: "Aluminium",
     summary: "Compact ventilators for bathrooms, utilities and exhausts.",
     description:
       "Small-format ventilators with fixed or adjustable louvers, exhaust fan provisions and top-hung vents. Keeps wet areas fresh while maintaining privacy with frosted glass options.",
@@ -278,36 +278,47 @@ export const stats = [
   { value: 98, suffix: "%", label: "Client satisfaction" },
 ];
 
+// From the company catalog's "Benefits" page
 export const features = [
   {
-    icon: "ThermometerSun",
-    title: "Thermal Insulation",
-    text: "Multi-chamber profiles and double glazing keep interiors up to 5°C cooler and cut AC costs.",
-  },
-  {
     icon: "Volume2",
-    title: "Acoustic Comfort",
-    text: "Reduce outside noise by up to 40 dB — silence the traffic, keep the view.",
-  },
-  {
-    icon: "CloudRain",
-    title: "Weather Sealed",
-    text: "EPDM gaskets and engineered drainage tested against heavy monsoon rain and wind loads.",
+    title: "Sound Resistance",
+    text: "Sound insulation and quality glazing make interiors surprisingly peaceful — you could forget where you are.",
   },
   {
     icon: "ShieldCheck",
-    title: "Secure by Design",
-    text: "Steel reinforcement and multi-point locking hardware for peace of mind.",
+    title: "Safety",
+    text: "Double the security: laminated glass plus safety grills with heavy inside rods.",
   },
   {
-    icon: "Sparkles",
-    title: "Zero Maintenance",
-    text: "UV-stabilised, lead-free profiles that never rot, rust, warp or need painting.",
+    icon: "Wind",
+    title: "Wind Resistance",
+    text: "A range of models engineered to match the wind pressure at your site.",
   },
   {
-    icon: "Leaf",
-    title: "Sustainable",
-    text: "Fully recyclable materials and energy-efficient performance for greener buildings.",
+    icon: "Droplets",
+    title: "Water Resistance",
+    text: "Expert assembly solutions across every design for zero water seepage.",
+  },
+  {
+    icon: "AirVent",
+    title: "Ventilation",
+    text: "Designed to deliver maximum ventilation, even through the hottest days.",
+  },
+  {
+    icon: "BugOff",
+    title: "Insect Protection",
+    text: "Every model can be fitted with an insect protection system.",
+  },
+  {
+    icon: "Wrench",
+    title: "Easy Assembly & Installation",
+    text: "With the right tools and machines, the system is simple to assemble and install.",
+  },
+  {
+    icon: "ShieldPlus",
+    title: "Impact Resistance",
+    text: "Built to withstand sudden, high-force impacts without breaking or significant damage.",
   },
 ];
 

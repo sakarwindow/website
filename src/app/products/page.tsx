@@ -5,7 +5,7 @@ import CTA from "@/components/sections/CTA";
 
 export const metadata: Metadata = {
   title: "Products",
-  description: "Explore our complete range of uPVC and aluminium windows, doors and specialty systems.",
+  description: "Explore our complete range of aluminium windows, doors and specialty systems.",
 };
 
 export default function ProductsPage() {

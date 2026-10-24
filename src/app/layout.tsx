@@ -24,13 +24,14 @@ const instrument = Instrument_Serif({
 export const metadata: Metadata = {
   metadataBase: new URL(company.url),
   title: {
-    default: `${company.name} — Premium uPVC & Aluminium Windows`,
+    default: `${company.name} — Premium Aluminium Windows & Doors`,
     template: `%s · ${company.name}`,
   },
   description: company.description,
   applicationName: company.name,
   keywords: [
-    "uPVC windows",
+    "aluminium doors",
+    "architectural glazing",
     "aluminium windows",
     "sliding windows",
     "casement windows",

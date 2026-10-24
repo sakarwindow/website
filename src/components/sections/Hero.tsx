@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
-import { ArrowDown, ArrowUpRight, ThermometerSun, Volume2 } from "lucide-react";
+import { ArrowDown, ArrowUpRight, Droplets, Volume2 } from "lucide-react";
 import WindowArt from "../WindowArt";
 import { Magnetic, SplitText } from "../ui/motion";
 import { company } from "@/lib/data";
@@ -44,7 +44,7 @@ export default function Hero() {
             className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-4 py-1.5 text-xs font-medium tracking-wide text-white/80 backdrop-blur"
           >
             <span className="size-1.5 animate-pulse rounded-full bg-brass" />
-            uPVC &amp; Aluminium Window Systems
+            Aluminium Window &amp; Door Systems
           </motion.span>
 
           <SplitText
@@ -100,8 +100,8 @@ export default function Hero() {
             <WindowArt kind="sliding" state={open ? "hover" : "rest"} className="relative w-full drop-shadow-[0_40px_60px_rgba(0,0,0,0.5)]" />
           </motion.div>
 
-          <FloatCard className="-left-4 top-6 sm:-left-16 sm:top-16" delay={1.4} icon={<Volume2 className="size-5" />} title="40 dB" text="Noise reduction" />
-          <FloatCard className="-right-4 bottom-6 sm:-right-12 sm:bottom-20" delay={1.6} icon={<ThermometerSun className="size-5" />} title="5°C" text="Cooler interiors" />
+          <FloatCard className="-left-4 top-6 sm:-left-16 sm:top-16" delay={1.4} icon={<Volume2 className="size-5" />} title="Peaceful" text="Sound resistance" />
+          <FloatCard className="-right-4 bottom-6 sm:-right-12 sm:bottom-20" delay={1.6} icon={<Droplets className="size-5" />} title="Zero leaks" text="Water resistance" />
         </motion.div>
       </div>
 
