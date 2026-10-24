@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { ArrowUpRight, Mail, MapPin, Phone } from "lucide-react";
-import { company, navLinks, products } from "@/lib/data";
+import { company, navLinks, products, telHref } from "@/lib/data";
 import Logo from "./Logo";
 
 export default function Footer() {
@@ -11,15 +11,16 @@ export default function Footer() {
           <div className="md:col-span-4">
             <Logo />
             <p className="mt-6 max-w-sm text-white/55">{company.description}</p>
-            <div className="mt-8 flex gap-3">
-              {Object.entries(company.socials).map(([name, href]) => (
+            <div className="mt-8 flex flex-wrap gap-3">
+              {company.socials.map((s) => (
                 <a
-                  key={name}
-                  href={href}
-                  className="grid size-10 place-items-center rounded-full border border-white/15 text-xs uppercase text-white/70 transition hover:border-brass hover:bg-brass hover:text-ink"
-                  aria-label={name}
+                  key={s.name}
+                  href={s.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="rounded-full border border-white/15 px-4 py-2 text-sm text-white/70 transition hover:border-brass hover:bg-brass hover:text-ink"
                 >
-                  {name.slice(0, 2)}
+                  {s.name}
                 </a>
               ))}
             </div>
@@ -53,15 +54,29 @@ export default function Footer() {
 
           <div className="space-y-4 md:col-span-3">
             <h4 className="text-xs font-semibold uppercase tracking-[0.2em] text-brass">Contact</h4>
-            <a href={`tel:${company.phone.replace(/\s/g, "")}`} className="mt-6 flex gap-3 text-white/65 hover:text-white">
-              <Phone className="mt-0.5 size-4 shrink-0 text-brass" /> {company.phone}
-            </a>
+            <div className="mt-6 flex gap-3 text-white/65">
+              <Phone className="mt-0.5 size-4 shrink-0 text-brass" />
+              <span className="flex flex-col gap-1">
+                {company.phones.map((p) => (
+                  <a key={p} href={telHref(p)} className="hover:text-white">
+                    {p}
+                  </a>
+                ))}
+              </span>
+            </div>
             <a href={`mailto:${company.email}`} className="flex gap-3 text-white/65 hover:text-white">
               <Mail className="mt-0.5 size-4 shrink-0 text-brass" /> {company.email}
             </a>
-            <p className="flex gap-3 text-white/65">
-              <MapPin className="mt-0.5 size-4 shrink-0 text-brass" /> {company.address}
-            </p>
+            <a href={company.maps} target="_blank" rel="noopener noreferrer" className="flex gap-3 text-white/65 hover:text-white">
+              <MapPin className="mt-0.5 size-4 shrink-0 text-brass" />
+              <span>
+                {company.addressLines.map((l) => (
+                  <span key={l} className="block">
+                    {l}
+                  </span>
+                ))}
+              </span>
+            </a>
           </div>
         </div>
 

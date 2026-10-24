@@ -37,7 +37,8 @@ export const metadata: Metadata = {
     "casement windows",
     "tilt and turn windows",
     "sliding doors",
-    "window manufacturer Ahmedabad",
+    "aluminium window manufacturer Morbi",
+    "aluminium windows Gujarat",
     company.name,
   ],
   openGraph: {
@@ -60,11 +61,10 @@ const jsonLd = {
   name: company.name,
   description: company.description,
   url: company.url,
-  telephone: company.phone,
+  telephone: company.phones,
   email: company.email,
   address: company.address,
   logo: `${company.url}/icon.svg`,
-  foundingDate: String(company.founded),
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {

@@ -1,28 +1,30 @@
 // ─────────────────────────────────────────────────────────────
-// All site content lives here. Replace with the real catalog
-// data (products, specs, contact details) — every page reads
-// from this file, so no component changes are needed.
+// All site content lives here (from the company catalog).
+// Technical specifications live in ./specs.ts.
 // ─────────────────────────────────────────────────────────────
 
 export const company = {
   name: "Sakar Window System",
   url: "https://www.sakarwindowsystem.com",
   short: "Sakar",
-  tagline: "Frames that define the view.",
+  tagline: "Strength in Every Frame.",
   description:
     "High-quality aluminium windows, doors and customised architectural solutions — the perfect balance of style, strength and functionality.",
-  phone: "+91 98765 43210",
+  phone: "+91 95869 95244",
+  phones: ["+91 95869 95244", "+91 96648 10539"],
   email: "info@sakarwindowsystem.com",
-  address: "Plot 12, GIDC Industrial Estate, Ahmedabad, Gujarat, India",
-  hours: "Mon – Sat · 9:30 AM – 7:00 PM",
-  founded: 2010,
-  socials: {
-    instagram: "#",
-    facebook: "#",
-    linkedin: "#",
-    youtube: "#",
-  },
+  address: "Nitin Zone - 2, Morbi - Rajkot Highway, Near J. K. Wooden, At. Sakat Sanala, Ta. & Dist. Morbi - 363641",
+  addressLines: ["Nitin Zone - 2, Morbi - Rajkot Highway,", "Near J. K. Wooden, At. Sakat Sanala,", "Ta. & Dist. Morbi - 363641"],
+  whatsapp: "https://wa.me/919586995244",
+  maps: "https://maps.app.goo.gl/2ajHH3eJxXWdxqW86",
+  // Add the Instagram profile URL here to show it in the footer
+  socials: [
+    { name: "WhatsApp", href: "https://wa.me/919586995244" },
+    { name: "Location", href: "https://maps.app.goo.gl/2ajHH3eJxXWdxqW86" },
+  ],
 };
+
+export const telHref = (phone: string) => `tel:${phone.replace(/\s/g, "")}`;
 
 export type WindowKind =
   | "sliding"
@@ -74,7 +76,7 @@ export const products: Product[] = [
     summary: "Classic aluminium sliders that open wide without taking up floor space.",
     description:
       "Our core sliding system: large glass panels glide along aluminium tracks to connect rooms with balconies, gardens and terraces. Because nothing swings open, it suits spaces where every square foot counts — from apartments to villas.",
-    highlights: ["Multi-panel configurations", "No swing space needed", "Large uninterrupted glass areas", "Insect mesh compatible"],
+    highlights: ["2, 3 & 4-track options", "Premium Euro & Exclusive Euro models", "Heights up to 3650 mm", "Single & multipoint locking"],
     applications: ["Living rooms", "Balconies", "Patios"],
   },
   {
@@ -86,7 +88,7 @@ export const products: Product[] = [
     summary: "Large, heavy panels that lift to glide and lower to seal.",
     description:
       "Designed for big openings and big views. The lift & slide mechanism raises the sash off its seals so even large glass panels move with ease, then lowers it back down to close tightly against the frame.",
-    highlights: ["Suited to large, heavy panels", "Smooth lift-to-slide operation", "Seals down when closed", "Ideal for panoramic openings"],
+    highlights: ["Multipoint lock with shoot bolt", "Heights up to 3660 mm", "Glass from 8 to 38 mm", "96 mm & 28 mm models"],
     applications: ["Terraces", "Villas", "Penthouses"],
   },
   {
@@ -98,12 +100,12 @@ export const products: Product[] = [
     summary: "Panels fold and stack aside to open an entire wall.",
     description:
       "Bi-fold panels concertina neatly to one or both sides, dissolving the boundary between inside and out. When closed, the slim aluminium frames give you a full wall of glass.",
-    highlights: ["Opens almost the full width", "Folds to one or both sides", "Slim aluminium profiles", "Indoor–outdoor living"],
+    highlights: ["Heights up to 3660 mm", "Glass from 6 to 40 mm", "Concealed or lock & key options", "Multipoint lock with handle"],
     applications: ["Gardens", "Restaurants", "Villas"],
   },
   {
     slug: "synchro-sliding-series",
-    name: "Synchro Sliding Series",
+    name: "Synchro Sliding Door Series",
     category: "Sliding",
     material: "Aluminium",
     images: [img("synchro-sliding", "Slim black synchro sliding doors parting from the centre between a living and dining room", "50% 48%")],
@@ -122,7 +124,7 @@ export const products: Product[] = [
     summary: "Slender frames that put the view first.",
     description:
       "The Slim Series reduces the visible aluminium to a minimum so more of every opening is glass. Clean black profiles bring a contemporary edge to sunrooms, living spaces and lake- or garden-facing rooms.",
-    highlights: ["Narrow sightlines", "More glass, less frame", "Contemporary black finish", "Smooth sliding panels"],
+    highlights: ["Slim interlocks from 20 to 32 mm", "2, 3 & 4-track options", "Heights up to 3650 mm", "45° / 90° cut joinery"],
     applications: ["Sunrooms", "Living rooms", "Holiday homes"],
   },
   {
@@ -134,19 +136,19 @@ export const products: Product[] = [
     summary: "Slim-profile sliders built for everyday balcony living.",
     description:
       "The Hybrid Slim Series pairs the clean look of a slim frame with a practical sliding system for daily use. Wide multi-panel layouts open living rooms onto balconies and terraces.",
-    highlights: ["Slim profile appearance", "Multi-panel layouts", "Balcony-friendly design", "Matte black finish"],
+    highlights: ["Exclusive Hybrid (E.H.) models", "2, 3 & 4-track options", "Heights up to 3650 mm", "Single & multipoint locking"],
     applications: ["Apartments", "Balconies", "Living rooms"],
   },
   {
     slug: "minimal-and-slim-series",
-    name: "Minimal & Slim Series",
+    name: "Minimal Slim Series",
     category: "Sliding",
     material: "Aluminium",
     images: [img("minimal-and-slim", "Floor-to-ceiling minimal sliding glass wall with near-invisible frames overlooking a lake and mountains")],
     summary: "Near-frameless glass walls for uninterrupted views.",
     description:
       "Our most minimal sliding system. Frames almost disappear, leaving floor-to-ceiling glass that turns the landscape into the main feature of the room.",
-    highlights: ["Ultra-slim, near-invisible frames", "Floor-to-ceiling glass", "Maximum natural light", "Architectural statement"],
+    highlights: ["10, 15 & 32 mm models", "Integrated mesh & concealed options", "Heights up to 3000 mm", "2-track & 2-track 4-sash layouts"],
     applications: ["Luxury homes", "Resorts", "Showrooms"],
   },
   {
@@ -158,7 +160,7 @@ export const products: Product[] = [
     summary: "Wide sliding doors that open homes onto terraces.",
     description:
       "Ventino sliding doors bring a refined natural-aluminium finish to wide openings. Multi-panel configurations connect interiors with covered terraces and outdoor dining spaces.",
-    highlights: ["Wide multi-panel openings", "Silver anodised look", "Smooth sliding operation", "Terrace and patio ready"],
+    highlights: ["2 & 3-track options", "Heights up to 3200 mm", "25 to 35 mm models", "Single & multipoint locking"],
     applications: ["Terraces", "Bungalows", "Outdoor dining"],
   },
   {
@@ -170,19 +172,18 @@ export const products: Product[] = [
     summary: "Sleek sliding panels for interiors, showrooms and offices.",
     description:
       "Mono Rail sliding panels create elegant glass divisions inside homes and commercial spaces. Tinted glass and a champagne aluminium finish give privacy with a premium feel.",
-    highlights: ["Interior partition sliding", "Centre or side opening", "Tinted glass option", "Champagne aluminium finish"],
+    highlights: ["Heights up to 3000 mm", "Panels up to 1200 mm wide", "Glass from 5 to 14 mm", "Multipoint locking"],
     applications: ["Showrooms", "Walk-in wardrobes", "Offices"],
   },
   {
     slug: "alu-wood-sliding-series",
     name: "Alu Wood Sliding Series",
     category: "Sliding",
-    material: "Aluminium · Wood finish",
+    material: "Aluminium · Real wood",
     images: [img("alu-wood-sliding", "Walnut woodgrain aluminium sliding doors seen from a timber deck", "45% 45%")],
-    summary: "The warmth of wood with the strength of aluminium.",
-    description:
-      "Alu Wood sliding doors combine an aluminium frame with a rich woodgrain finish, so you get the natural look of timber without the upkeep. Ideal for homes that open onto decks and gardens.",
-    highlights: ["Natural woodgrain finish", "Aluminium strength", "Low maintenance vs. timber", "Large multi-panel doors"],
+    summary: "Real wood finish with the strength of aluminium.",
+    description: "Alu Wood sliding doors pair an aluminium frame with a real wood finish, bringing natural warmth to large openings. Double-glazed or laminated glass from 18 to 24 mm adds comfort and safety.",
+    highlights: ["Real wood finish", "DGU or laminated glass", "34 mm shutter depth", "Single & multipoint locking"],
     applications: ["Villas", "Decks", "Farmhouses"],
   },
 
@@ -196,19 +197,18 @@ export const products: Product[] = [
     summary: "Side-hung windows that open fully for fresh air.",
     description:
       "Casement windows are hinged at the side and open completely, giving excellent ventilation and an unobstructed view. When closed, they press firmly against the frame for a tight seal.",
-    highlights: ["Side-hung opening", "Full-opening ventilation", "Tight closing seal", "Single or multi-sash layouts"],
+    highlights: ["Single, 2-in-1 & 3-in-1 frames", "30 to 50 mm models", "Heights up to 2430 mm", "Single & multipoint locking"],
     applications: ["Bedrooms", "Living rooms", "Kitchens"],
   },
   {
     slug: "alu-wood-casement-series",
     name: "Alu Wood Casement Series",
     category: "Windows",
-    material: "Aluminium · Wood finish",
+    material: "Aluminium · Real wood",
     images: [img("alu-wood-casement", "Honey woodgrain aluminium casement window with grid bars, one sash open to a snowy forest", "50% 40%")],
-    summary: "Classic timber-look casements with aluminium durability.",
-    description:
-      "All the charm of a traditional wooden window, built in aluminium. Woodgrain-finished casement sashes open outward on side hinges, with optional grid bars for a classic look.",
-    highlights: ["Warm woodgrain finish", "Side-hung casement sashes", "Optional grid bars", "No painting or polishing"],
+    summary: "Classic casements in real wood with aluminium strength.",
+    description: "All the charm of a traditional wooden window, built on an aluminium frame with a real wood finish. Side-hung casement sashes with double-glazed or laminated glass from 18 to 24 mm.",
+    highlights: ["Real wood finish", "DGU or laminated glass", "55 mm shutter depth", "Single & multipoint locking"],
     applications: ["Bedrooms", "Cottages", "Heritage-style homes"],
   },
   {
@@ -220,12 +220,12 @@ export const products: Product[] = [
     summary: "Tilt in for secure ventilation, turn to open fully.",
     description:
       "One handle, two ways to open. Tilt the sash inward at the top for safe, draught-free ventilation, or turn it fully open like a door for fresh air and easy cleaning from inside.",
-    highlights: ["Dual tilt and turn operation", "Secure ventilation position", "Easy to clean from inside", "Inward opening"],
+    highlights: ["Dual tilt & turn operation", "Glass from 5 to 32 mm", "Heights up to 2440 mm", "Multipoint locking"],
     applications: ["Apartments", "High-rise", "Hospitals"],
   },
   {
     slug: "parallel-window",
-    name: "Parallel Window",
+    name: "Parallel Window Series",
     category: "Windows",
     material: "Aluminium",
     images: [
@@ -247,12 +247,12 @@ export const products: Product[] = [
     summary: "Outward-opening sashes that ventilate while keeping rain out.",
     description:
       "Shown here with top-hung sashes that push outward at the bottom, letting fresh air in while the open sash shields the opening from rain. A clean black frame suits contemporary interiors.",
-    highlights: ["Outward-opening sashes", "Ventilation with rain shelter", "Friction-stay hardware", "Matte black finish"],
+    highlights: ["Outward-opening sashes", "Glass from 5 to 8 mm", "Heights up to 1200 mm", "90° cut corner joinery"],
     applications: ["Bathrooms", "Kitchens", "Bedrooms"],
   },
   {
     slug: "arc-window-series",
-    name: "Arc Window Series",
+    name: "Exclusive Arc Window Series",
     category: "Windows",
     material: "Aluminium",
     images: [
@@ -276,7 +276,7 @@ export const products: Product[] = [
     summary: "Statement entrance doors with glass side panels.",
     description:
       "Make a strong first impression with aluminium entrance doors. Double leaves, full-height side panels, frosted glass for privacy and long pull handles combine security with modern style.",
-    highlights: ["Single or double leaf", "Frosted or clear glass", "Long pull handle", "Side panel options"],
+    highlights: ["40, 50, 115 & French door models", "Heights up to 3000 mm", "Glass from 5 to 28 mm", "Single & multipoint locking"],
     applications: ["Main entrances", "Villas", "Offices"],
   },
   {
@@ -345,7 +345,7 @@ export const products: Product[] = [
   // ── Add-ons ─────────────────────────────────────────────
   {
     slug: "mosquito-series",
-    name: "Mosquito Series",
+    name: "Mosquito Net Series",
     category: "Add-ons",
     material: "Aluminium",
     images: [img("mosquito", "Black sliding door with one glass panel and one pleated insect mesh panel")],
@@ -357,7 +357,7 @@ export const products: Product[] = [
   },
   {
     slug: "grill-series",
-    name: "Grill Series",
+    name: "Exclusive Grill Series",
     category: "Add-ons",
     material: "Aluminium",
     images: [img("grill", "White three-part window with black grid grill pattern overlooking a walled garden", "45% 40%")],
@@ -369,7 +369,7 @@ export const products: Product[] = [
   },
   {
     slug: "georgian-bar-series",
-    name: "Georgian Bar Series",
+    name: "Exclusive Georgian Bar Series",
     category: "Add-ons",
     material: "Aluminium",
     images: [img("georgian-bar", "White French doors and side panels with Georgian grid bars facing a lawn", "52% 45%")],
@@ -399,18 +399,24 @@ export const featuredProducts = [
   "mosquito-series",
 ].map(bySlug);
 
+const heroSlide = (slug: string) => {
+  const p = bySlug(slug);
+  return { ...p.images[0], slug, name: p.name };
+};
+
 /** Photos the home hero cycles through */
 export const heroSlides = [
-  { ...bySlug("minimal-and-slim-series").images[0], slug: "minimal-and-slim-series", name: "Minimal & Slim Series" },
-  { ...bySlug("arc-window-series").images[0], slug: "arc-window-series", name: "Arc Window Series" },
-  { ...bySlug("synchro-sliding-series").images[0], slug: "synchro-sliding-series", name: "Synchro Sliding Series" },
+  heroSlide("minimal-and-slim-series"),
+  heroSlide("arc-window-series"),
+  heroSlide("synchro-sliding-series"),
 ];
 
+// Facts drawn from the catalog
 export const stats = [
-  { value: 15, suffix: "+", label: "Years of craftsmanship" },
-  { value: 12000, suffix: "+", label: "Windows installed" },
-  { value: 850, suffix: "+", label: "Projects delivered" },
-  { value: 98, suffix: "%", label: "Client satisfaction" },
+  { value: 25, suffix: "", label: "Product series" },
+  { value: 3660, suffix: " mm", label: "Max. panel height" },
+  { value: 4, suffix: "", label: "Track options, up to 4-track" },
+  { value: 3, suffix: "", label: "Finishes — powder, wood & anodizing" },
 ];
 
 // From the company catalog's "Benefits" page
@@ -480,34 +486,15 @@ export const process = [
   },
 ];
 
+// Finish types from the catalog: powder coat, wood (effect or real wood) and anodizing.
+// Swatch colours are illustrative examples of each type.
 export const finishes = [
-  { name: "Classic White", color: "#f4f4f2" },
-  { name: "Golden Oak", color: "#b07a3f" },
-  { name: "Walnut", color: "#5b3a24" },
-  { name: "Anthracite Grey", color: "#383e42" },
-  { name: "Jet Black", color: "#16181b" },
-  { name: "Silver Grey", color: "#a5a9ad" },
-];
-
-export const testimonials = [
-  {
-    quote:
-      "The sliding windows completely transformed our apartment. The traffic noise is gone and the AC bill dropped noticeably in the first summer.",
-    name: "Rajesh Patel",
-    role: "Homeowner, Ahmedabad",
-  },
-  {
-    quote:
-      "Sakar delivered 400+ units for our residential tower on schedule. Finishing and site coordination were genuinely professional.",
-    name: "Meera Shah",
-    role: "Project Manager, Builder Group",
-  },
-  {
-    quote:
-      "We specified their slide & fold doors for a restaurant façade. Smooth, sturdy and the clients love the open feel.",
-    name: "Ar. Kunal Desai",
-    role: "Principal Architect",
-  },
+  { name: "Powder · White", color: "#f4f4f2" },
+  { name: "Powder · Black", color: "#16181b" },
+  { name: "Wood · Oak", color: "#b07a3f" },
+  { name: "Wood · Walnut", color: "#5b3a24" },
+  { name: "Anodized · Silver", color: "#a5a9ad" },
+  { name: "Anodized · Champagne", color: "#b9a27e" },
 ];
 
 export const navLinks = [

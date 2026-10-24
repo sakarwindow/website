@@ -46,8 +46,8 @@ export default function Hero() {
 
           <SplitText
             as="h1"
-            text="Frames that define the view."
-            italicWords={["define"]}
+            text="Strength in every frame."
+            italicWords={["every"]}
             delay={0.2}
             className="mt-8 text-[2.75rem] font-semibold leading-[1.02] tracking-tight min-[400px]:text-5xl sm:text-7xl xl:text-8xl"
           />

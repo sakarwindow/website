@@ -5,7 +5,6 @@ import ProductShowcase from "@/components/sections/ProductShowcase";
 import Features from "@/components/sections/Features";
 import Finishes from "@/components/sections/Finishes";
 import Process from "@/components/sections/Process";
-import Testimonials from "@/components/sections/Testimonials";
 import CTA from "@/components/sections/CTA";
 
 export default function Home() {
@@ -18,7 +17,6 @@ export default function Home() {
       <Features />
       <Finishes />
       <Process />
-      <Testimonials />
       <CTA />
     </>
   );

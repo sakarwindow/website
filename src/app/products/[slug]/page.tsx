@@ -2,7 +2,9 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ArrowLeft, ArrowUpRight, Check, FileText, Phone } from "lucide-react";
-import { company, products } from "@/lib/data";
+import { company, products, telHref } from "@/lib/data";
+import { productSpecs } from "@/lib/specs";
+import SpecTable from "@/components/SpecTable";
 import ProductGallery from "@/components/ProductGallery";
 import ProductCard from "@/components/ProductCard";
 import CTA from "@/components/sections/CTA";
@@ -16,7 +18,11 @@ export async function generateMetadata(props: PageProps<"/products/[slug]">): Pr
   const { slug } = await props.params;
   const product = products.find((p) => p.slug === slug);
   return product
-    ? { title: product.name, description: product.summary, openGraph: { images: [product.images[0].src] } }
+    ? {
+        title: product.name,
+        description: product.summary,
+        openGraph: { images: [product.images[0].src] },
+      }
     : {};
 }
 
@@ -25,6 +31,7 @@ export default async function ProductPage(props: PageProps<"/products/[slug]">) 
   const product = products.find((p) => p.slug === slug);
   if (!product) notFound();
 
+  const specs = productSpecs[product.slug];
   const related = products.filter((p) => p.slug !== product.slug && p.category === product.category).slice(0, 3);
   const more = related.length ? related : products.filter((p) => p.slug !== product.slug).slice(0, 3);
 
@@ -37,7 +44,10 @@ export default async function ProductPage(props: PageProps<"/products/[slug]">) 
         <div className="relative mx-auto grid grid-cols-1 max-w-7xl gap-16 lg:grid-cols-2 lg:items-center">
           <div>
             <Reveal y={10}>
-              <Link href="/products" className="group inline-flex items-center gap-2 text-sm text-white/60 hover:text-white">
+              <Link
+                href="/products"
+                className="group inline-flex items-center gap-2 text-sm text-white/60 hover:text-white"
+              >
                 <ArrowLeft className="size-4 transition-transform group-hover:-translate-x-1" /> All products
               </Link>
             </Reveal>
@@ -95,25 +105,27 @@ export default async function ProductPage(props: PageProps<"/products/[slug]">) 
           </div>
 
           <div>
-            <Eyebrow>Specifications</Eyebrow>
+            <Eyebrow>{specs ? "Drawings & Quotation" : "Specifications"}</Eyebrow>
             <Reveal className="mt-10 rounded-3xl bg-ink p-8 text-white md:p-10">
               <FileText className="size-8 text-brass" />
-              <h3 className="mt-6 text-2xl font-semibold tracking-tight">Tailored to your opening</h3>
+              <h3 className="mt-6 text-2xl font-semibold tracking-tight">
+                {specs ? "Get drawings for your project" : "Tailored to your opening"}
+              </h3>
               <p className="mt-3 leading-relaxed text-white/60">
                 Profile sizes, glass options, hardware and finishes for the {product.name} are configured to your
-                site&apos;s dimensions and wind load. Share your requirements and we&apos;ll send detailed specifications
-                with your quotation.
+                site&apos;s dimensions. Share your requirements and we&apos;ll send detailed specifications with your
+                quotation.
               </p>
               <div className="mt-8 flex flex-wrap gap-3">
                 <Link
                   href={`/contact?product=${product.slug}`}
                   className="group inline-flex items-center gap-2 rounded-full bg-brass px-6 py-3 font-semibold text-ink transition hover:bg-brass-2"
                 >
-                  Request specifications
+                  {specs ? "Request drawings & quote" : "Request specifications"}
                   <ArrowUpRight className="size-4 transition-transform group-hover:rotate-45" />
                 </Link>
                 <a
-                  href={`tel:${company.phone.replace(/\s/g, "")}`}
+                  href={telHref(company.phone)}
                   className="inline-flex items-center gap-2 rounded-full border border-white/20 px-6 py-3 font-semibold transition hover:bg-white/5"
                 >
                   <Phone className="size-4" /> Call us
@@ -123,6 +135,41 @@ export default async function ProductPage(props: PageProps<"/products/[slug]">) 
           </div>
         </div>
       </section>
+
+      {specs && (
+        <section className="bg-paper px-6 pb-16 md:pb-32">
+          <div className="mx-auto max-w-7xl">
+            <div className="flex flex-col justify-between gap-3 border-b-4 border-ink pb-4 sm:flex-row sm:items-end">
+              <SplitText text="Technical Specification" className="text-3xl font-semibold tracking-tight md:text-5xl" />
+              <p className="text-sm font-semibold text-ink/60">All sizes are in millimetres (mm)</p>
+            </div>
+
+            {specs.table && (
+              <Reveal className="mt-8">
+                <SpecTable table={specs.table} />
+                {specs.legend && <p className="mt-3 text-right text-sm font-semibold text-brass">{specs.legend}</p>}
+              </Reveal>
+            )}
+
+            <Reveal className="mt-10">
+              <dl className="grid max-w-3xl gap-y-3">
+                {specs.details.map((d) => (
+                  <div
+                    key={d.label}
+                    className="grid grid-cols-[minmax(8rem,auto)_1fr] gap-x-4 text-base sm:grid-cols-[13rem_1.25rem_1fr] sm:gap-x-2 sm:text-lg"
+                  >
+                    <dt className="font-semibold text-ink">{d.label}</dt>
+                    <span aria-hidden className="hidden font-semibold text-ink sm:block">
+                      :
+                    </span>
+                    <dd className="text-ink/70">{d.value}</dd>
+                  </div>
+                ))}
+              </dl>
+            </Reveal>
+          </div>
+        </section>
+      )}
 
       <section className="bg-paper-2/60 px-6 py-16 md:py-32">
         <div className="mx-auto max-w-7xl">

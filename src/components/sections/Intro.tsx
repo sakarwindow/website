@@ -16,7 +16,7 @@ export default function Intro() {
   return (
     <section className="bg-paper px-6 py-20 md:py-40">
       <div className="mx-auto max-w-7xl">
-        <Eyebrow>Since {company.founded}</Eyebrow>
+        <Eyebrow>{company.tagline}</Eyebrow>
         <p ref={ref} className="mt-8 max-w-5xl text-2xl font-medium leading-[1.25] tracking-tight sm:text-3xl md:text-5xl">
           {words.map((w, i) => (
             <Word key={i} progress={scrollYProgress} range={[i / words.length, (i + 1) / words.length]}>
