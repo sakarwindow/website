@@ -1,5 +1,5 @@
 import { ImageResponse } from "next/og";
-import { OgCard } from "@/lib/brand-image";
+import { brandLogo, OgCard } from "@/lib/brand-image";
 import { company } from "@/lib/data";
 
 export const alt = `${company.name} — Premium Aluminium Windows & Doors`;
@@ -8,7 +8,7 @@ export const contentType = "image/png";
 
 export default function OpengraphImage() {
   return new ImageResponse(
-    <OgCard eyebrow="Aluminium Window & Door Systems" title={company.tagline} subtitle={company.description} />,
+    <OgCard logo={brandLogo} eyebrow="Aluminium Window & Door Systems" title={company.tagline} subtitle={company.description} />,
     size,
   );
 }

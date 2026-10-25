@@ -1,25 +1,33 @@
-// Shared JSX for generated images (apple icon, Open Graph cards).
+// Shared JSX for generated Open Graph images.
 // ImageResponse only supports inline styles and flexbox.
+import { readFile } from "node:fs/promises";
+import path from "node:path";
 
 export const brand = {
   ink: "#0a0e17",
-  ink2: "#121826",
   brass: "#c9a36a",
-  brass2: "#e6c993",
-  paper: "#f5f3ee",
 };
 
-export function LogoMark({ size }: { size: number }) {
-  return (
-    <svg width={size} height={size} viewBox="0 0 64 64">
-      <rect x="6" y="6" width="52" height="52" rx="5" fill="none" stroke={brand.brass} strokeWidth="5" />
-      <path d="M32 7v50M7 32h50" stroke={brand.brass} strokeWidth="4" />
-      <rect x="11.5" y="11.5" width="18" height="18" fill={brand.brass} />
-    </svg>
-  );
-}
+const dataUrl = async (file: string) =>
+  `data:image/png;base64,${await readFile(path.join(process.cwd(), "public/brand", file), "base64")}`;
 
-export function OgCard({ eyebrow, title, subtitle }: { eyebrow: string; title: string; subtitle: string }) {
+/** Logo files as data URLs for ImageResponse — read once at module scope so the images stay static */
+export const brandLogo = {
+  mark: await dataUrl("sakar-mark.png"),
+  wordmark: await dataUrl("sakar-wordmark-light.png"),
+};
+
+export function OgCard({
+  logo,
+  eyebrow,
+  title,
+  subtitle,
+}: {
+  logo: { mark: string; wordmark: string };
+  eyebrow: string;
+  title: string;
+  subtitle: string;
+}) {
   return (
     <div
       style={{
@@ -33,12 +41,13 @@ export function OgCard({ eyebrow, title, subtitle }: { eyebrow: string; title: s
         color: "white",
       }}
     >
-      <div style={{ display: "flex", alignItems: "center", gap: 20 }}>
-        <LogoMark size={64} />
-        <div style={{ display: "flex", flexDirection: "column" }}>
-          <span style={{ fontSize: 34, fontWeight: 700, letterSpacing: -0.5 }}>SAKAR</span>
-          <span style={{ fontSize: 14, letterSpacing: 6, opacity: 0.6 }}>WINDOW SYSTEM</span>
+      <div style={{ display: "flex", alignItems: "center", gap: 18 }}>
+        <div style={{ display: "flex", padding: 8, background: "white", borderRadius: 16 }}>
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img src={logo.mark} height={64} width={52} alt="" />
         </div>
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img src={logo.wordmark} height={54} width={246} alt="" />
       </div>
 
       <div style={{ display: "flex", flexDirection: "column" }}>

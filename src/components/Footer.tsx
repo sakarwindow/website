@@ -1,4 +1,6 @@
 import Link from "next/link";
+import Image from "next/image";
+import tagline from "../../public/brand/sakar-tagline-light.png";
 import { ArrowUpRight, Mail, MapPin, Phone } from "lucide-react";
 import { company, navLinks, products, telHref } from "@/lib/data";
 import Logo from "./Logo";
@@ -10,7 +12,8 @@ export default function Footer() {
         <div className="grid gap-14 md:grid-cols-12">
           <div className="md:col-span-4">
             <Logo />
-            <p className="mt-6 max-w-sm text-white/55">{company.description}</p>
+            <Image src={tagline} alt={company.tagline} className="mt-5 h-9 w-auto opacity-80" />
+            <p className="mt-5 max-w-sm text-white/55">{company.description}</p>
             <div className="mt-8 flex flex-wrap gap-3">
               {company.socials.map((s) => (
                 <a

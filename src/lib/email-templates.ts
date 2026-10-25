@@ -19,8 +19,7 @@ function layout(title: string, body: string) {
 <table width="100%" cellpadding="0" cellspacing="0" style="padding:32px 12px"><tr><td align="center">
 <table width="100%" cellpadding="0" cellspacing="0" style="max-width:560px;background:#ffffff;border-radius:20px;overflow:hidden">
   <tr><td style="background:#0a0e17;padding:28px 32px">
-    <span style="color:#ffffff;font-size:20px;font-weight:700;letter-spacing:-0.3px">SAKAR</span>
-    <span style="color:#c9a36a;font-size:11px;letter-spacing:3px;margin-left:8px">WINDOW SYSTEM</span>
+    <img src="${company.url}/brand/sakar-wordmark-light.png" alt="SAKAR Window System" height="34" style="display:block;height:34px;width:auto;border:0;color:#ffffff;font-size:20px;font-weight:700">
   </td></tr>
   <tr><td style="padding:32px">
     <h1 style="margin:0 0 20px;font-size:24px;letter-spacing:-0.5px">${title}</h1>

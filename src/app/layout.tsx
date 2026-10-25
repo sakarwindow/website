@@ -64,7 +64,7 @@ const jsonLd = {
   telephone: company.phones,
   email: company.email,
   address: company.address,
-  logo: `${company.url}/icon.svg`,
+  logo: `${company.url}/brand/sakar-logo-full-dark.png`,
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {

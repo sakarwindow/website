@@ -1,17 +1,19 @@
+import Image from "next/image";
+import clsx from "clsx";
 import { company } from "@/lib/data";
+import mark from "../../public/brand/sakar-mark.png";
+import wordmarkLight from "../../public/brand/sakar-wordmark-light.png";
+import wordmarkDark from "../../public/brand/sakar-wordmark-dark.png";
 
-export default function Logo({ dark = false }: { dark?: boolean }) {
+/** Brand lockup: S window mark + SAKAR wordmark. Use `dark` on light backgrounds. */
+export default function Logo({ dark = false, className }: { dark?: boolean; className?: string }) {
   return (
-    <span className="flex items-center gap-2.5">
-      <svg viewBox="0 0 32 32" className="size-8" aria-hidden>
-        <rect x="2" y="2" width="28" height="28" rx="4" fill="none" stroke="#c9a36a" strokeWidth="2.5" />
-        <path d="M16 3v26M3 16h26" stroke="#c9a36a" strokeWidth="2" />
-        <rect x="5.5" y="5.5" width="8.5" height="8.5" fill="#c9a36a" opacity="0.9" />
-      </svg>
-      <span className={`leading-none ${dark ? "text-ink" : "text-white"}`}>
-        <span className="block text-lg font-bold tracking-tight">{company.short.toUpperCase()}</span>
-        <span className="block text-[9px] font-medium uppercase tracking-[0.3em] opacity-60">Window System</span>
+    <span className={clsx("flex items-center gap-2.5", className)}>
+      {/* On dark backgrounds the mark's black curve needs a white tile to stay legible */}
+      <span className={clsx("grid shrink-0 place-items-center", !dark && "size-11 rounded-xl bg-white shadow-sm")}>
+        <Image src={mark} alt="" preload className={dark ? "h-10 w-auto" : "h-8 w-auto"} />
       </span>
+      <Image src={dark ? wordmarkDark : wordmarkLight} alt={company.name} preload className="h-7 w-auto" />
     </span>
   );
 }
