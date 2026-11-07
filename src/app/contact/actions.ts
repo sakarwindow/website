@@ -38,7 +38,10 @@ export async function sendEnquiry(_prev: EnquiryState, formData: FormData): Prom
   if (enquiry.email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(enquiry.email)) errors.email = "Please enter a valid email.";
   if (Object.keys(errors).length) return { status: "error", errors, values: enquiry, message: "Please check the highlighted fields." };
 
-  const { RESEND_API_KEY, CONTACT_TO_EMAIL, CONTACT_FROM_EMAIL } = process.env;
+  const { CONTACT_TO_EMAIL, CONTACT_FROM_EMAIL } = process.env;
+  // The Vercel ↔ Resend integration prefixes its vars with whatever prefix was chosen at install
+  // (here "RESEND_API_KEY_"), so accept that name as well as the plain one used locally.
+  const RESEND_API_KEY = process.env.RESEND_API_KEY || process.env.RESEND_API_KEY_RESEND_API_KEY;
   if (!RESEND_API_KEY || !CONTACT_TO_EMAIL || !CONTACT_FROM_EMAIL) {
     console.error("Contact form: RESEND_API_KEY, CONTACT_TO_EMAIL and CONTACT_FROM_EMAIL must be set.");
     return {
