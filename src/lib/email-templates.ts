@@ -47,12 +47,18 @@ function rows(e: Enquiry) {
     .join("");
 }
 
+function messageBlock(e: Enquiry) {
+  return e.message
+    ? `<p style="margin:24px 0 8px;color:#6b7280;font-size:14px">Message</p><p style="margin:0;padding:16px;background:#f5f3ee;border-radius:12px;font-size:15px;line-height:1.6;white-space:pre-wrap">${esc(e.message)}</p>`
+    : "";
+}
+
 /** Sent to the company inbox. */
 export function enquiryNotification(e: Enquiry) {
   const html = layout(
     "New website enquiry",
     `<table width="100%" cellpadding="0" cellspacing="0">${rows(e)}</table>
-     ${e.message ? `<p style="margin:24px 0 8px;color:#6b7280;font-size:14px">Message</p><p style="margin:0;padding:16px;background:#f5f3ee;border-radius:12px;font-size:15px;line-height:1.6;white-space:pre-wrap">${esc(e.message)}</p>` : ""}
+     ${messageBlock(e)}
      <p style="margin:28px 0 0;font-size:15px;color:#374151">Call ${esc(e.name.split(" ")[0])} on <strong style="color:#0a0e17">${esc(e.phone)}</strong></p>`,
   );
   const text = [
@@ -76,8 +82,25 @@ export function enquiryConfirmation(e: Enquiry) {
     `<p style="margin:0 0 16px;font-size:15px;line-height:1.6;color:#374151">We've received your enquiry and our team will get back to you within one working day with recommendations and a free, no-obligation quote.</p>
      <p style="margin:0 0 24px;font-size:15px;line-height:1.6;color:#374151">Here's a copy of what you sent:</p>
      <table width="100%" cellpadding="0" cellspacing="0">${rows(e)}</table>
+     ${messageBlock(e)}
      <p style="margin:28px 0 0;font-size:15px;line-height:1.6;color:#374151">Need to talk sooner? Call us on <strong style="color:#b08343">${esc(company.phone)}</strong>.</p>`,
   );
-  const text = `Thank you, ${first}!\n\nWe've received your enquiry and will get back to you within one working day.\n\nNeed to talk sooner? Call ${company.phone}.\n\n— ${company.name}`;
+  const text = [
+    `Thank you, ${first}!`,
+    "",
+    "We've received your enquiry and will get back to you within one working day.",
+    "",
+    "Here's a copy of what you sent:",
+    `Name: ${e.name}`,
+    `Phone: ${e.phone}`,
+    `Email: ${e.email || "-"}`,
+    `Interested in: ${e.product || "Not sure yet"}`,
+    `Project type: ${e.projectType}`,
+    ...(e.message ? ["", "Message:", e.message] : []),
+    "",
+    `Need to talk sooner? Call ${company.phone}.`,
+    "",
+    `— ${company.name}`,
+  ].join("\n");
   return { subject: `We've received your enquiry — ${company.name}`, html, text };
 }
